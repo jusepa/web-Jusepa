@@ -248,11 +248,12 @@
             <h3 class="font-serif text-center text-3xl mb-16 italic">Jusepa Journal</h3>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
-                <!-- Articulo 1: Con MARGEN/PADDING para efecto zoom out -->
-                <article class="group cursor-pointer">
-                    <!-- Se agregó p-4 y bg-gray-50 para crear el efecto de marco -->
+                <!-- Articulo 1: Con ONCLICK para abrir modal -->
+                <article class="group">
                     <div class="h-64 overflow-hidden mb-6 p-4 bg-gray-50">
-                        <img src="journal-piedra-natural.jpg" alt="Textura piedra" class="w-full h-full object-cover image-hover-zoom">
+                        <img src="journal-piedra-natural.jpg" alt="Textura piedra" 
+                             class="w-full h-full object-cover image-hover-zoom cursor-zoom-in"
+                             onclick="openModal(this.src)">
                     </div>
                     <div class="border-t border-black pt-4">
                         <span class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Tendencias</span>
@@ -260,10 +261,12 @@
                     </div>
                 </article>
 
-                <!-- Articulo 2: Con MARGEN/PADDING para efecto zoom out -->
-                <article class="group cursor-pointer">
+                <!-- Articulo 2: Con ONCLICK para abrir modal -->
+                <article class="group">
                     <div class="h-64 overflow-hidden mb-6 p-4 bg-gray-50">
-                        <img src="journal-estilo-japandi.jpg" alt="Japandi style" class="w-full h-full object-cover image-hover-zoom">
+                        <img src="journal-estilo-japandi.jpg" alt="Japandi style" 
+                             class="w-full h-full object-cover image-hover-zoom cursor-zoom-in"
+                             onclick="openModal(this.src)">
                     </div>
                     <div class="border-t border-black pt-4">
                         <span class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Estilo de Vida</span>
@@ -271,10 +274,12 @@
                     </div>
                 </article>
 
-                <!-- Articulo 3: Con MARGEN/PADDING para efecto zoom out -->
-                <article class="group cursor-pointer">
+                <!-- Articulo 3: Con ONCLICK para abrir modal -->
+                <article class="group">
                     <div class="h-64 overflow-hidden mb-6 p-4 bg-gray-50">
-                        <img src="journal-arte-minimal.jpg" alt="Minimal art" class="w-full h-full object-cover image-hover-zoom">
+                        <img src="journal-arte-minimal.jpg" alt="Minimal art" 
+                             class="w-full h-full object-cover image-hover-zoom cursor-zoom-in"
+                             onclick="openModal(this.src)">
                     </div>
                     <div class="border-t border-black pt-4">
                         <span class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Entrevistas</span>
@@ -328,7 +333,16 @@
         </div>
     </footer>
 
-    <!-- Script simple para smooth scroll y reveal on scroll (opcional) -->
+    <!-- MODAL / VISOR DE IMÁGENES -->
+    <!-- Este div está oculto (hidden) y se muestra al hacer clic en una foto del journal -->
+    <div id="image-modal" class="fixed inset-0 z-[60] bg-black/90 hidden flex justify-center items-center p-4 transition-opacity duration-300 backdrop-blur-sm" onclick="closeModal()">
+        <!-- Botón de cerrar -->
+        <span class="absolute top-4 right-8 text-white text-5xl font-light cursor-pointer hover:text-gray-300 z-[70]">&times;</span>
+        <!-- Imagen ampliada -->
+        <img id="modal-img" class="max-h-[90vh] max-w-full object-contain shadow-2xl rounded-sm" src="" alt="Vista ampliada" onclick="event.stopPropagation()">
+    </div>
+
+    <!-- SCRIPTS -->
     <script>
         // Cambiar estilo de navbar al hacer scroll
         window.addEventListener('scroll', () => {
@@ -339,6 +353,34 @@
             } else {
                 nav.classList.remove('shadow-sm');
                 nav.classList.replace('py-3', 'py-4');
+            }
+        });
+
+        // Funciones para el Visor de Imágenes (Modal)
+        function openModal(src) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-img');
+            
+            // Configurar la imagen y mostrar el modal
+            modalImg.src = src;
+            modal.classList.remove('hidden');
+            
+            // Bloquear el scroll del body mientras el modal está abierto
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('image-modal');
+            
+            // Ocultar modal y restaurar scroll
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar con la tecla ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeModal();
             }
         });
     </script>
