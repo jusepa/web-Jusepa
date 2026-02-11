@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Bloquear acceso a carpetas administrativas y archivos del sistema
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /private/
+Disallow: /config/
+
+# Optimización de rastreo para el Sitemap
+Sitemap: https://jusepa.cl/sitemap.xml
