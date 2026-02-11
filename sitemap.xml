@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <!-- Página Principal (La única URL real del sitio) -->
+   <url>
+      <loc>https://www.jusepa.cl/</loc>
+      <lastmod>2026-02-11</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>1.00</priority>
+   </url>
+   
+   <!-- 
+      Nota: Los buscadores como Google no indexan las secciones con # 
+      (ej. #proyectos, #contacto) como páginas separadas en el sitemap, 
+      ya que todo vive dentro de la página principal.
+   -->
+</urlset>
